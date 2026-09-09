@@ -19,6 +19,14 @@ accessible interfaces, and strong visual identities across mobile and web.
 - E-commerce
 - Responsive Design
 
+## Tools & Software
+
+- Figma / Adobe XD
+- Adobe Photoshop / Illustrator
+- Adobe InDesign / Premiere Pro
+- Adobe After Effects
+- HTML5 / CSS3 / Tailwind Basics
+
 ## Work Experience
 
 ### Senior Graphic & UX/UI Designer
@@ -69,6 +77,20 @@ Supported creative projects for regional clients across branding, digital market
 * Produced motion graphics and visual content for digital platforms.
 * Assisted with creative concepts and campaign development.
 * Worked across multiple projects while maintaining brand consistency and quality.
+
+## Education
+
+### Short Course
+
+**Computer Graphics & Design** · **STEP IT Academy**
+
+Focus on user experience, human-computer interaction, and visual communication.
+
+### Certification
+
+**Professional UX/UI Certificate** · **STEP IT Academy / Future.bit Academy**
+
+Advanced coursework covering user research methodologies, prototyping, and accessibility standards for creating usable, enjoyable, and accessible digital products.
 
 ## Selected Projects
 
