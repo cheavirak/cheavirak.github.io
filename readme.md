@@ -25,7 +25,6 @@ accessible interfaces, and strong visual identities across mobile and web.
 - Adobe Photoshop / Illustrator
 - Adobe InDesign / Premiere Pro
 - Adobe After Effects
-- HTML5 / CSS3 / Tailwind Basics
 
 ## Work Experience
 
