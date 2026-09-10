@@ -41,7 +41,7 @@ Lead the design of digital products and brand experiences across web and mobile 
 * Collaborate with developers to ensure accurate and consistent implementation.
 * Contribute to product decisions through user flows, interaction design, and visual direction.
 
-### UI/UX Designer
+### Graphic Designer/UI/UX Designer
 
 **PEAK Digital Ltd.** · **2023 — 2024**
 
