@@ -98,8 +98,7 @@ Advanced coursework covering user research methodologies, prototyping, and acces
 - **PEAK Mobile App:** Mobile experience for accessing services, managing profiles, and receiving notifications.
 - **PEAK Landing Page:** Responsive landing page focused on brand presentation, services, and conversion.
 - **TrueHome Landing Page:** Marketing website showcasing services, projects, and brand identity.
-- **W8Bet:** Responsive betting platform with sports interfaces, dashboards, navigation, and transaction flows.
-- **NextBet:** Streamlined betting experience covering account management, betting interactions, and transactions.
+- **Casino:** Responsive betting platform with sports interfaces, dashboards, navigation, and transaction flows.
 - **P/E Essential App:** E-commerce experience covering product discovery, promotions, vouchers, membership, rewards, checkout, and order tracking.
 - **Velzo:** Marketplace experience connecting shoppers and sellers through discovery, favorites, sharing, profiles, and shopping flows.
 
