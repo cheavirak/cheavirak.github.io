@@ -1,514 +1,2562 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chea Virak | Senior Graphic & UX/UI Designer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
-      body {
-        font-family: "Inter", sans-serif;
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Chea Virak | Senior Graphic & UX/UI Designer</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* =====================================================
+       ROOT
+    ===================================================== */
+
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #4338ca;
+      --primary-light: #eef2ff;
+
+      --text: #111827;
+      --muted: #6b7280;
+
+      --bg: #f9fafb;
+      --white: #ffffff;
+
+      --border: #e5e7eb;
+    }
+
+    /* =====================================================
+       GLOBAL
+    ===================================================== */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: var(--primary);
+      color: white;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* =====================================================
+       CUSTOM SCROLLBAR
+    ===================================================== */
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f3f4f6;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #c7d2fe;
+      border-radius: 999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #818cf8;
+    }
+
+    /* =====================================================
+       PAGE LOADER
+    ===================================================== */
+
+    #page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition:
+        opacity 0.6s ease,
+        visibility 0.6s ease;
+    }
+
+    #page-loader.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-content {
+      text-align: center;
+    }
+
+    .loader-logo {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 20px;
+      animation: loaderPulse 1.4s ease-in-out infinite;
+    }
+
+    .loader-line {
+      width: 120px;
+      height: 3px;
+      background: #e5e7eb;
+      overflow: hidden;
+      border-radius: 999px;
+    }
+
+    .loader-line::before {
+      content: "";
+      display: block;
+      width: 50%;
+      height: 100%;
+      background: var(--primary);
+      border-radius: inherit;
+      animation: loaderMove 1s ease-in-out infinite;
+    }
+
+    @keyframes loaderPulse {
+      0%,
+      100% {
+        opacity: 0.5;
+        transform: scale(0.98);
       }
-    </style>
-  </head>
-  <body
-    class="bg-gray-50 text-gray-800 antialiased selection:bg-indigo-500 selection:text-white"
+
+      50% {
+        opacity: 1;
+        transform: scale(1.03);
+      }
+    }
+
+    @keyframes loaderMove {
+      0% {
+        transform: translateX(-120%);
+      }
+
+      100% {
+        transform: translateX(250%);
+      }
+    }
+
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
+
+    #navbar {
+      transition:
+        background 0.35s ease,
+        box-shadow 0.35s ease,
+        padding 0.35s ease;
+    }
+
+    #navbar.scrolled {
+      background: rgba(255, 255, 255, 0.92) !important;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.06);
+    }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.25s ease;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -7px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--primary);
+    }
+
+    /* Mobile menu */
+
+    #mobile-menu {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition:
+        max-height 0.4s ease,
+        opacity 0.3s ease;
+    }
+
+    #mobile-menu.open {
+      max-height: 500px;
+      opacity: 1;
+    }
+
+    .menu-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .menu-icon.rotate {
+      transform: rotate(90deg);
+    }
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+
+    #hero {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background glow */
+
+    .hero-glow-1,
+    .hero-glow-2 {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(10px);
+    }
+
+    .hero-glow-1 {
+      width: 500px;
+      height: 500px;
+      top: -180px;
+      right: -150px;
+      background: radial-gradient(
+        circle,
+        rgba(79, 70, 229, 0.14),
+        transparent 70%
+      );
+      animation: glowFloat 8s ease-in-out infinite alternate;
+    }
+
+    .hero-glow-2 {
+      width: 350px;
+      height: 350px;
+      left: -200px;
+      bottom: -150px;
+      background: radial-gradient(
+        circle,
+        rgba(129, 140, 248, 0.1),
+        transparent 70%
+      );
+      animation: glowFloat 10s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes glowFloat {
+      from {
+        transform: translate(0, 0) scale(1);
+      }
+
+      to {
+        transform: translate(-40px, 30px) scale(1.1);
+      }
+    }
+
+    /* Hero content */
+
+    .hero-content {
+      animation: heroEnter 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    .hero-badge {
+      animation-delay: 0.1s;
+    }
+
+    .hero-title {
+      animation-delay: 0.2s;
+    }
+
+    .hero-role {
+      animation-delay: 0.3s;
+    }
+
+    .hero-description {
+      animation-delay: 0.4s;
+    }
+
+    .hero-buttons {
+      animation-delay: 0.5s;
+    }
+
+    @keyframes heroEnter {
+      from {
+        opacity: 0;
+        transform: translateY(35px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Profile */
+
+    .profile-wrapper {
+      position: relative;
+      animation: profileEnter 1s 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)
+        both;
+    }
+
+    @keyframes profileEnter {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .profile-ring {
+      position: relative;
+      animation: profileFloat 5s ease-in-out infinite;
+    }
+
+    .profile-ring::before {
+      content: "";
+      position: absolute;
+      inset: -15px;
+      border-radius: 50%;
+      border: 1px solid rgba(79, 70, 229, 0.15);
+      animation: ringRotate 10s linear infinite;
+    }
+
+    .profile-ring::after {
+      content: "";
+      position: absolute;
+      inset: -28px;
+      border-radius: 50%;
+      border: 1px dashed rgba(79, 70, 229, 0.12);
+      animation: ringRotateReverse 18s linear infinite;
+    }
+
+    @keyframes profileFloat {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    @keyframes ringRotate {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes ringRotateReverse {
+      from {
+        transform: rotate(360deg);
+      }
+
+      to {
+        transform: rotate(0deg);
+      }
+    }
+
+    .profile-image {
+      transition:
+        transform 0.5s ease,
+        filter 0.5s ease;
+    }
+
+    .profile-ring:hover .profile-image {
+      transform: scale(1.04);
+      filter: saturate(1.1);
+    }
+
+    /* Floating decorative dots */
+
+    .floating-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      opacity: 0.5;
+    }
+
+    .dot-1 {
+      top: 10%;
+      right: 10%;
+      animation: dotFloat 4s ease-in-out infinite;
+    }
+
+    .dot-2 {
+      bottom: 15%;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      animation: dotFloat 5s 1s ease-in-out infinite;
+    }
+
+    .dot-3 {
+      top: 40%;
+      left: -20px;
+      width: 5px;
+      height: 5px;
+      animation: dotFloat 4s 0.5s ease-in-out infinite;
+    }
+
+    @keyframes dotFloat {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    /* =====================================================
+       BUTTONS
+    ===================================================== */
+
+    .primary-button,
+    .secondary-button {
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+    }
+
+    .primary-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -130%;
+      width: 80%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.25),
+        transparent
+      );
+      transform: skewX(-20deg);
+      transition: left 0.65s ease;
+    }
+
+    .primary-button:hover::before {
+      left: 140%;
+    }
+
+    .primary-button:hover,
+    .secondary-button:hover {
+      transform: translateY(-4px);
+    }
+
+    .primary-button:hover {
+      box-shadow: 0 15px 35px rgba(79, 70, 229, 0.25);
+    }
+
+    .secondary-button:hover {
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    /* =====================================================
+       SECTION HEADERS
+    ===================================================== */
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-label::before {
+      content: "";
+      width: 25px;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 999px;
+    }
+
+    /* =====================================================
+       SCROLL REVEAL
+    ===================================================== */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .reveal-left.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .reveal-right.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* =====================================================
+       SKILL CARDS
+    ===================================================== */
+
+    .skill-card {
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow 0.4s ease,
+        border-color 0.4s ease;
+    }
+
+    .skill-card::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      right: -100px;
+      top: -100px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      transition: transform 0.5s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+      border-color: rgba(79, 70, 229, 0.2);
+    }
+
+    .skill-card:hover::before {
+      transform: scale(1.8);
+    }
+
+    .skill-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .skill-icon {
+      transition:
+        transform 0.4s ease,
+        background 0.4s ease;
+    }
+
+    .skill-card:hover .skill-icon {
+      transform: translateY(-3px) rotate(-4deg);
+      background: var(--primary);
+      color: white;
+    }
+
+    .skill-list li {
+      transition:
+        transform 0.25s ease,
+        color 0.25s ease;
+    }
+
+    .skill-list li:hover {
+      transform: translateX(5px);
+      color: var(--primary);
+    }
+
+    /* =====================================================
+       EXPERTISE TAGS
+    ===================================================== */
+
+    .expertise-tag {
+      display: inline-block;
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+    }
+
+    .expertise-tag:hover {
+      transform: translateY(-4px);
+      background: #e0e7ff;
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.12);
+    }
+
+    /* =====================================================
+       PROJECT CARDS
+    ===================================================== */
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow 0.45s ease,
+        border-color 0.45s ease;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(
+        90deg,
+        #4f46e5,
+        #818cf8
+      );
+      transition: width 0.5s ease;
+      z-index: 2;
+    }
+
+    .project-card::after {
+      content: "";
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      right: -100px;
+      bottom: -100px;
+      border-radius: 50%;
+      background: rgba(79, 70, 229, 0.04);
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow:
+        0 25px 55px rgba(0, 0, 0, 0.08),
+        0 5px 20px rgba(79, 70, 229, 0.05);
+      border-color: rgba(79, 70, 229, 0.2);
+    }
+
+    .project-card:hover::before {
+      width: 100%;
+    }
+
+    .project-card:hover::after {
+      transform: scale(2);
+    }
+
+    .project-number {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #d1d5db;
+      transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .project-card:hover .project-number {
+      color: #a5b4fc;
+      transform: translateY(-3px);
+    }
+
+    .project-title {
+      transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .project-card:hover .project-title {
+      color: var(--primary);
+      transform: translateX(4px);
+    }
+
+    .project-arrow {
+      display: inline-flex;
+      transition:
+        transform 0.3s ease,
+        color 0.3s ease;
+    }
+
+    .project-card:hover .project-arrow {
+      transform: translateX(5px);
+      color: var(--primary);
+    }
+
+    /* =====================================================
+       EXPERIENCE TIMELINE
+    ===================================================== */
+
+    .experience-item {
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .experience-item:hover {
+      transform: translateX(6px);
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -33px;
+      top: 5px;
+      width: 11px;
+      height: 11px;
+      background: white;
+      border: 3px solid var(--primary);
+      border-radius: 50%;
+      transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+    }
+
+    .experience-item:hover .timeline-dot {
+      transform: scale(1.45);
+      background: var(--primary);
+    }
+
+    .experience-item ul li {
+      transition: transform 0.25s ease;
+    }
+
+    .experience-item ul li:hover {
+      transform: translateX(4px);
+    }
+
+    /* =====================================================
+       EDUCATION
+    ===================================================== */
+
+    .education-card {
+      transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease,
+        border-color 0.4s ease;
+    }
+
+    .education-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+      border-color: rgba(79, 70, 229, 0.15);
+    }
+
+    /* =====================================================
+       CONTACT
+    ===================================================== */
+
+    #contact {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-glow {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(15px);
+    }
+
+    .contact-glow-1 {
+      width: 400px;
+      height: 400px;
+      left: -200px;
+      top: -200px;
+      background: rgba(79, 70, 229, 0.15);
+    }
+
+    .contact-glow-2 {
+      width: 350px;
+      height: 350px;
+      right: -170px;
+      bottom: -170px;
+      background: rgba(99, 102, 241, 0.12);
+    }
+
+    .contact-button {
+      position: relative;
+      z-index: 2;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .contact-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* =====================================================
+       BACK TO TOP
+    ===================================================== */
+
+    #back-to-top {
+      position: fixed;
+      right: 25px;
+      bottom: 25px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(15px);
+      transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        transform 0.3s ease,
+        background 0.3s ease;
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.25);
+    }
+
+    #back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    #back-to-top:hover {
+      background: var(--primary-dark);
+      transform: translateY(-4px);
+    }
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 768px) {
+      .hero-glow-1 {
+        width: 300px;
+        height: 300px;
+        right: -150px;
+      }
+
+      .hero-glow-2 {
+        width: 250px;
+        height: 250px;
+        left: -150px;
+      }
+
+      .profile-ring::before {
+        inset: -10px;
+      }
+
+      .profile-ring::after {
+        inset: -20px;
+      }
+
+      .timeline-dot {
+        left: -27px;
+      }
+
+      #back-to-top {
+        width: 40px;
+        height: 40px;
+        right: 18px;
+        bottom: 18px;
+      }
+    }
+
+    /* =====================================================
+       REDUCE MOTION
+    ===================================================== */
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+  <!-- =====================================================
+       PAGE LOADER
+  ====================================================== -->
+
+  <div id="page-loader">
+    <div class="loader-content">
+      <div class="loader-logo">CV<span class="text-gray-400">.</span></div>
+      <div class="loader-line"></div>
+    </div>
+  </div>
+
+
+  <!-- =====================================================
+       NAVIGATION
+  ====================================================== -->
+
+  <nav
+    id="navbar"
+    class="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100"
   >
-    <nav
-      class="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100"
+
+    <div
+      class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center"
     >
-      <div
-        class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center"
+
+      <!-- Logo -->
+
+      <a
+        href="#"
+        class="text-xl font-bold tracking-tight text-indigo-600"
       >
-        <a href="#" class="text-xl font-bold tracking-tight text-indigo-600"
-          >Chea Virak<span class="text-gray-400">.</span></a
+        Chea Virak<span class="text-gray-400">.</span>
+      </a>
+
+
+      <!-- Desktop Navigation -->
+
+      <div
+        class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-600"
+      >
+
+        <a href="#skills" class="nav-link">Skills</a>
+
+        <a href="#expertise" class="nav-link">Expertise</a>
+
+        <a href="#projects" class="nav-link">Projects</a>
+
+        <a href="#experience" class="nav-link">Experience</a>
+
+        <a href="#education" class="nav-link">Education</a>
+
+        <a href="#contact" class="nav-link">Contact</a>
+
+      </div>
+
+
+      <!-- Desktop CTA -->
+
+      <a
+        href="#contact"
+        class="hidden md:inline-flex primary-button bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium"
+      >
+        Get in Touch
+      </a>
+
+
+      <!-- Mobile Button -->
+
+      <button
+        id="menu-button"
+        class="md:hidden w-10 h-10 rounded-lg border border-gray-200 flex items-center justify-center text-gray-700"
+        aria-label="Open navigation"
+      >
+        <i class="fa-solid fa-bars menu-icon"></i>
+      </button>
+
+    </div>
+
+
+    <!-- Mobile Navigation -->
+
+    <div id="mobile-menu" class="md:hidden border-t border-gray-100 bg-white">
+
+      <div class="px-6 py-5 space-y-4 text-sm font-medium">
+
+        <a
+          href="#skills"
+          class="mobile-nav-link block text-gray-600 hover:text-indigo-600"
         >
-        <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-600">
-          <a href="#skills" class="hover:text-indigo-600 transition-colors"
-            >Skills</a
-          >
-          <a href="#expertise" class="hover:text-indigo-600 transition-colors"
-            >Expertise</a
-          >
-          <a href="#projects" class="hover:text-indigo-600 transition-colors"
-            >Projects</a
-          >
-          <a href="#experience" class="hover:text-indigo-600 transition-colors"
-            >Experience</a
-          >
-          <a href="#education" class="hover:text-indigo-600 transition-colors"
-            >Education</a
-          >
-          <a href="#contact" class="hover:text-indigo-600 transition-colors"
-            >Contact</a
-          >
-        </div>
+          Skills
+        </a>
+
+        <a
+          href="#expertise"
+          class="mobile-nav-link block text-gray-600 hover:text-indigo-600"
+        >
+          Expertise
+        </a>
+
+        <a
+          href="#projects"
+          class="mobile-nav-link block text-gray-600 hover:text-indigo-600"
+        >
+          Projects
+        </a>
+
+        <a
+          href="#experience"
+          class="mobile-nav-link block text-gray-600 hover:text-indigo-600"
+        >
+          Experience
+        </a>
+
+        <a
+          href="#education"
+          class="mobile-nav-link block text-gray-600 hover:text-indigo-600"
+        >
+          Education
+        </a>
+
         <a
           href="#contact"
-          class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors"
-          >Get in Touch</a
+          class="mobile-nav-link block text-gray-600 hover:text-indigo-600"
         >
-      </div>
-    </nav>
+          Contact
+        </a>
 
-    <section
-      class="pt-36 pb-20 px-6 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12"
+      </div>
+
+    </div>
+
+  </nav>
+
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <section
+    id="hero"
+    class="pt-36 pb-24 px-6 min-h-[90vh] flex items-center"
+  >
+
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+
+
+    <div
+      class="max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center justify-between gap-16"
     >
-      <div class="space-y-6 max-w-2xl">
+
+      <!-- Hero Content -->
+
+      <div class="max-w-2xl relative z-10">
+
         <div
-          class="inline-block bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full text-sm font-semibold"
+          class="hero-content hero-badge inline-flex bg-indigo-50 text-indigo-600 px-4 py-2 rounded-full text-sm font-semibold mb-6"
         >
-          Portfolio
+          <span class="mr-2">✦</span>
+          Senior Graphic & UX/UI Designer
         </div>
+
+
         <h1
-          class="text-4xl sm:text-6xl font-extrabold text-gray-900 tracking-tight leading-tight"
+          class="hero-content hero-title text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 tracking-tight leading-[1.05]"
         >
-          Chea Virak
+          Chea
+          <span class="text-indigo-600">Virak</span>
         </h1>
-        <p class="text-xl font-medium text-indigo-600">
-          UX/UI & Senior Graphic Designer
+
+
+        <p
+          class="hero-content hero-role text-xl sm:text-2xl font-semibold text-gray-600 mt-5"
+        >
+          Designing meaningful
+          <span class="text-indigo-600">digital experiences.</span>
         </p>
-        <p class="text-gray-600 text-lg leading-relaxed">
+
+
+        <p
+          class="hero-content hero-description text-gray-600 text-lg leading-relaxed mt-6 max-w-xl"
+        >
           Creating clear digital products, accessible interfaces, and strong
           visual identities across mobile and web. I focus on intuitive user
           experiences, useful design systems, and responsive interfaces.
         </p>
-        <div class="pt-2 flex flex-wrap gap-4">
+
+
+        <!-- Buttons -->
+
+        <div
+          class="hero-content hero-buttons flex flex-wrap gap-4 mt-8"
+        >
+
           <a
             href="#projects"
-            class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-100"
+            class="primary-button bg-indigo-600 text-white px-6 py-3.5 rounded-xl font-medium inline-flex items-center gap-2"
           >
-            View Work
+            View My Work
+            <i class="fa-solid fa-arrow-down text-sm"></i>
           </a>
+
+
           <a
             href="#contact"
-            class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+            class="secondary-button border border-gray-300 bg-white text-gray-700 px-6 py-3.5 rounded-xl font-medium inline-flex items-center gap-2"
           >
             Contact Me
+            <i class="fa-regular fa-paper-plane text-sm"></i>
           </a>
-        </div>
-      </div>
-      <div
-        class="w-48 h-48 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl ring-8 ring-indigo-50 shrink-0"
-      >
-        <img
-          src="public/profile.png"
-          alt="Portrait of Chea Virak"
-          class="w-full h-full object-cover"
-        />
-      </div>
-    </section>
 
-    <section id="skills" class="py-20 bg-white border-y border-gray-100">
-      <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-3xl font-bold text-gray-900 mb-12">
-          Skills & Expertise
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div
-            class="p-6 bg-gray-50 rounded-2xl border border-gray-100 space-y-4"
-          >
-            <div
-              class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center text-xl font-bold"
-            >
-              <i class="fa-solid fa-pen-nib"></i>
-            </div>
-            <h3 class="text-xl font-semibold text-gray-900">Graphic Design</h3>
-            <ul class="space-y-2 text-gray-600 text-sm">
-              <li>Brand Identity & Logo Design</li>
-              <li>Marketing & Editorial Assets</li>
-              <li>Typography & Layout Systems</li>
-              <li>Vector Illustration & Iconography</li>
-            </ul>
-          </div>
-          <div
-            class="p-6 bg-gray-50 rounded-2xl border border-gray-100 space-y-4"
-          >
-            <div
-              class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center text-xl font-bold"
-            >
-              <i class="fa-solid fa-layer-group"></i>
-            </div>
-            <h3 class="text-xl font-semibold text-gray-900">UX/UI Design</h3>
-            <ul class="space-y-2 text-gray-600 text-sm">
-              <li>User Research & Persona Building</li>
-              <li>Wireframing & Interactive Prototyping</li>
-              <li>Design Systems & Component Libraries</li>
-              <li>Usability Testing & Accessibility (WCAG)</li>
-            </ul>
-          </div>
-          <div
-            class="p-6 bg-gray-50 rounded-2xl border border-gray-100 space-y-4"
-          >
-            <div
-              class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center text-xl font-bold"
-            >
-              <i class="fa-solid fa-toolbox"></i>
-            </div>
-            <h3 class="text-xl font-semibold text-gray-900">Tools & Software</h3>
-            <ul class="space-y-2 text-gray-600 text-sm">
-              <li>Figma / Adobe XD</li>
-              <li>Adobe Photoshop / Illustrator</li>
-              <li>InDesign / Premiere Pro</li>
-            </ul>
-          </div>
         </div>
-      </div>
-    </section>
 
-    <section id="expertise" class="py-16 max-w-6xl mx-auto px-6">
-      <div class="max-w-3xl">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">Core Expertise</h2>
-        <p class="text-gray-500 mb-8">
-          Design capabilities focused on clear, useful, and engaging digital
-          experiences.
-        </p>
-        <div class="flex flex-wrap gap-3">
-          <span
-            class="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium"
-            >UX/UI Design</span
-          >
-          <span
-            class="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium"
-            >Product Design</span
-          >
-          <span
-            class="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium"
-            >Visual Design</span
-          >
-          <span
-            class="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium"
-            >Mobile & Web Design</span
-          >
-          <span
-            class="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium"
-            >Design Systems</span
-          >
-          <span
-            class="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium"
-            >User Flows</span
-          >
-          <span
-            class="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium"
-            >Dashboard Design</span
-          >
-          <span
-            class="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium"
-            >E-commerce</span
-          >
-          <span
-            class="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium"
-            >Responsive Design</span
-          >
-        </div>
-      </div>
-    </section>
 
-    <section id="projects" class="py-20 max-w-6xl mx-auto px-6">
-      <div class="flex justify-between items-end mb-12">
-        <div>
-          <h2 class="text-3xl font-bold text-gray-900">Projects</h2>
-          <p class="text-gray-500 mt-2">
-            Selected UI/UX and visual design work.
-          </p>
-        </div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div
-          class="group bg-white rounded-2xl border border-gray-100 p-6 space-y-3 shadow-sm hover:shadow-md transition-shadow"
-        >
-          <span
-            class="text-xs font-semibold text-indigo-600 uppercase tracking-wider"
-            >UX/UI Design, Visual Design</span
-          >
-          <h3
-            class="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors"
-          >
-            KSL — Cambodian Sign Language
-          </h3>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            Designed an accessible learning and communication platform focused
-            on Cambodian Sign Language education and usability.
-          </p>
-        </div>
-        <div
-          class="group bg-white rounded-2xl border border-gray-100 p-6 space-y-3 shadow-sm hover:shadow-md transition-shadow"
-        >
-          <span
-            class="text-xs font-semibold text-indigo-600 uppercase tracking-wider"
-            >UX/UI Design</span
-          >
-          <h3
-            class="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors"
-          >
-            TrueHome System
-          </h3>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            Designed dashboards and management workflows for property,
-            construction, projects, and business data.
-          </p>
-        </div>
-        <div
-          class="group bg-white rounded-2xl border border-gray-100 p-6 space-y-3 shadow-sm hover:shadow-md transition-shadow"
-        >
-          <span
-            class="text-xs font-semibold text-indigo-600 uppercase tracking-wider"
-            >UX/UI Design</span
-          >
-          <h3
-            class="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors"
-          >
-            PEAK Mobile App
-          </h3>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            Designed a simple mobile experience for accessing services, managing
-            profiles, and receiving notifications.
-          </p>
-        </div>
-        <div
-          class="group bg-white rounded-2xl border border-gray-100 p-6 space-y-3 shadow-sm hover:shadow-md transition-shadow"
-        >
-          <span
-            class="text-xs font-semibold text-indigo-600 uppercase tracking-wider"
-            >UI Design, Visual Design</span
-          >
-          <h3
-            class="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors"
-          >
-            PEAK Landing Page
-          </h3>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            Created a modern, responsive landing page focused on brand
-            presentation, services, and conversion.
-          </p>
-        </div>
-        <div
-          class="group bg-white rounded-2xl border border-gray-100 p-6 space-y-3 shadow-sm hover:shadow-md transition-shadow"
-        >
-          <span
-            class="text-xs font-semibold text-indigo-600 uppercase tracking-wider"
-            >UX/UI Design, Visual Design</span
-          >
-          <h3
-            class="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors"
-          >
-            TrueHome Landing Page
-          </h3>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            Designed a marketing website showcasing services, projects, and
-            brand identity.
-          </p>
-        </div>
-        <div
-          class="group bg-white rounded-2xl border border-gray-100 p-6 space-y-3 shadow-sm hover:shadow-md transition-shadow"
-        >
-          <span
-            class="text-xs font-semibold text-indigo-600 uppercase tracking-wider"
-            >UX/UI Design</span
-          >
-          <h3
-            class="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors"
-          >
-            Casino
-          </h3>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            Designed a responsive betting platform with sports interfaces,
-            dashboards, navigation, and transaction flows.
-          </p>
-        </div>
-        <div
-          class="group bg-white rounded-2xl border border-gray-100 p-6 space-y-3 shadow-sm hover:shadow-md transition-shadow"
-        >
-          <span
-            class="text-xs font-semibold text-indigo-600 uppercase tracking-wider"
-            >UX/UI Design</span
-          >
-          <h3
-            class="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors"
-          >
-            P/E Essential App
-          </h3>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            Designed an e-commerce experience covering product discovery,
-            shopping, promotions, vouchers, membership, rewards, checkout, and
-            order tracking.
-          </p>
-        </div>
-        <div
-          class="group bg-white rounded-2xl border border-gray-100 p-6 space-y-3 shadow-sm hover:shadow-md transition-shadow"
-        >
-          <span
-            class="text-xs font-semibold text-indigo-600 uppercase tracking-wider"
-            >UX/UI Design, Product Design</span
-          >
-          <h3
-            class="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors"
-          >
-            Velzo
-          </h3>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            Designed a marketplace experience connecting shoppers and sellers
-            through product discovery, favorites, sharing, profiles, and
-            shopping flows.
-          </p>
-        </div>
-      </div>
-    </section>
+        <!-- Small social links -->
 
-    <section id="experience" class="py-20 bg-white border-y border-gray-100">
-      <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-3xl font-bold text-gray-900 mb-12">
-          Professional Experience
-        </h2>
-        <div class="space-y-8 max-w-3xl">
-          <div class="border-l-2 border-indigo-600 pl-6 space-y-2">
-            <span class="text-sm font-semibold text-indigo-600"
-              >2024 — Present</span
-            >
-            <h3 class="text-xl font-bold text-gray-900">
-              Senior Graphic & UX/UI Designer
-            </h3>
-            <p class="text-sm text-gray-500">PEAK Digital Ltd.</p>
-            <p class="text-gray-600 text-sm leading-relaxed">
-              Lead digital product and brand experience design across web and
-              mobile, covering UX/UI, product design, visual design, branding,
-              and marketing.
-            </p>
-            <ul class="list-disc list-inside text-gray-600 text-sm space-y-1">
-              <li>Lead UX/UI and product design from concept to implementation.</li>
-              <li>Design dashboards, e-commerce experiences, and internal systems.</li>
-              <li>Develop design systems, visual guidelines, and reusable components.</li>
-              <li>Collaborate with developers and stakeholders on user-centered solutions.</li>
-            </ul>
-          </div>
-          <div class="border-l-2 border-gray-200 pl-6 space-y-2">
-            <span class="text-sm font-semibold text-gray-400">2023 — 2024</span>
-            <h3 class="text-xl font-bold text-gray-900">Graphic Designer & UI/UX Designer</h3>
-            <p class="text-sm text-gray-500">PEAK Digital Ltd.</p>
-            <p class="text-gray-600 text-sm leading-relaxed">
-              Designed user experiences and interfaces for web and mobile
-              products, working closely with product teams and developers.
-            </p>
-            <ul class="list-disc list-inside text-gray-600 text-sm space-y-1">
-              <li>Created user flows, wireframes, prototypes, and high-fidelity UI designs.</li>
-              <li>Designed responsive interfaces for web and mobile platforms.</li>
-              <li>Improved usability, navigation, and overall product experience.</li>
-            </ul>
-          </div>
-          <div class="border-l-2 border-gray-200 pl-6 space-y-2">
-            <span class="text-sm font-semibold text-gray-400">2020 — 2023</span>
-            <h3 class="text-xl font-bold text-gray-900">Graphic Designer</h3>
-            <p class="text-sm text-gray-500">In-House Property Management</p>
-            <p class="text-gray-600 text-sm leading-relaxed">
-              Created visual and marketing materials supporting property
-              management, business operations, and promotional campaigns.
-            </p>
-            <ul class="list-disc list-inside text-gray-600 text-sm space-y-1">
-              <li>Designed social media content, advertisements, and campaigns.</li>
-              <li>Developed visual concepts aligned with brand identity and business goals.</li>
-              <li>Maintained consistent visual communication across digital and print channels.</li>
-            </ul>
-          </div>
-          <div class="border-l-2 border-gray-200 pl-6 space-y-2">
-            <span class="text-sm font-semibold text-gray-400">2018 — 2020</span>
-            <h3 class="text-xl font-bold text-gray-900">Junior Graphic Designer</h3>
-            <p class="text-sm text-gray-500">Top Marketing Indochina</p>
-            <p class="text-gray-600 text-sm leading-relaxed">
-              Supported regional client projects across branding, digital
-              marketing, print, and motion design.
-            </p>
-            <ul class="list-disc list-inside text-gray-600 text-sm space-y-1">
-              <li>Created digital, social media, print, and promotional assets.</li>
-              <li>Produced motion graphics and visual content for digital platforms.</li>
-              <li>Assisted with creative concepts while maintaining brand consistency.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+        <div class="flex items-center gap-5 mt-8 text-gray-400">
 
-    <section id="education" class="py-20 max-w-6xl mx-auto px-6">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12">Education</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div
-          class="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm space-y-2"
-        >
-          <span class="text-sm font-semibold text-indigo-600"
-            >Short Course</span
-          >
-          <h3 class="text-xl font-bold text-gray-900">
-            Computer Graphics &amp; Design
-          </h3>
-          <p class="text-sm text-gray-500">STEP IT Academy</p>
-          <p class="text-gray-600 text-sm pt-2">
-            Focus on user experience, human-computer interaction, and visual
-            communication.
-          </p>
-        </div>
-        <div
-          class="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm space-y-2"
-        >
-          <span class="text-sm font-semibold text-indigo-600"
-            >Certification</span
-          >
-          <h3 class="text-xl font-bold text-gray-900">
-            Professional UX/UI Certificate
-          </h3>
-          <p class="text-sm text-gray-500">
-            STEP IT Academy / Future.bit Academy
-          </p>
-          <p class="text-gray-600 text-sm pt-2">
-            Advanced coursework covering user research methodologies,
-            prototyping, and accessibility standards for creating usable,
-            enjoyable, and accessible digital products.
-          </p>
-        </div>
-      </div>
-    </section>
+          <span class="text-xs uppercase tracking-widest font-semibold">
+            Connect
+          </span>
 
-    <section id="contact" class="py-20 bg-gray-900 text-white">
-      <div class="max-w-6xl mx-auto px-6 text-center space-y-8">
-        <h2 class="text-3xl font-bold">Let's Work Together</h2>
-        <p class="text-gray-400 max-w-xl mx-auto">
-          Available for full-time opportunities, high-impact design consulting,
-          and select freelance projects across mobile and web.
-        </p>
-        <div
-          class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4"
-        >
           <a
             href="mailto:cheavirak6799@gmail.com"
-            class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium transition-colors inline-flex items-center gap-2"
+            class="hover:text-indigo-600 transition-colors"
+            aria-label="Email"
           >
-            <i class="fa-brands fa-google text-xl" aria-hidden="true"></i>
-            Gmail
+            <i class="fa-solid fa-envelope"></i>
           </a>
-          <a
-            href="tel:+85570703705"
-            class="text-gray-300 hover:text-white font-medium border border-gray-700 px-6 py-3 rounded-lg transition-colors inline-flex items-center gap-2"
-          >
-            <i class="fa-solid fa-phone text-xl" aria-hidden="true"></i>
-            Call +855 70 703 705
-          </a>
+
           <a
             href="https://t.me/PhosRak"
             target="_blank"
             rel="noreferrer"
-            class="text-[#229ED9] hover:text-white font-medium border border-[#229ED9] hover:bg-[#229ED9] px-6 py-3 rounded-lg transition-colors inline-flex items-center gap-2"
+            class="hover:text-indigo-600 transition-colors"
+            aria-label="Telegram"
           >
-            <i class="fa-brands fa-telegram text-xl" aria-hidden="true"></i>
-            Telegram
+            <i class="fa-brands fa-telegram"></i>
           </a>
+
         </div>
-        <p class="text-xs text-gray-500 pt-12">
+
+      </div>
+
+
+      <!-- Profile -->
+
+      <div
+        class="profile-wrapper shrink-0 relative"
+      >
+
+        <div class="floating-dot dot-1"></div>
+        <div class="floating-dot dot-2"></div>
+        <div class="floating-dot dot-3"></div>
+
+        <div
+          class="profile-ring w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full bg-white p-2 shadow-2xl ring-8 ring-indigo-50"
+        >
+
+          <img
+            src="public/profile.png"
+            alt="Portrait of Chea Virak"
+            class="profile-image w-full h-full object-cover rounded-full"
+          />
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       SKILLS
+  ====================================================== -->
+
+  <section
+    id="skills"
+    class="py-24 bg-white border-y border-gray-100"
+  >
+
+    <div class="max-w-6xl mx-auto px-6">
+
+      <div class="reveal">
+
+        <span class="section-label">
+          What I Do
+        </span>
+
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">
+          Skills & Expertise
+        </h2>
+
+        <p class="text-gray-500 mt-3 max-w-2xl">
+          Combining visual design, user experience, and product thinking
+          to create useful digital experiences.
+        </p>
+
+      </div>
+
+
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 gap-7 mt-12"
+      >
+
+        <!-- Graphic Design -->
+
+        <div
+          class="skill-card reveal p-7 bg-gray-50 rounded-2xl border border-gray-100"
+        >
+
+          <div
+            class="skill-icon w-14 h-14 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center text-xl mb-6"
+          >
+            <i class="fa-solid fa-pen-nib"></i>
+          </div>
+
+          <h3 class="text-xl font-bold text-gray-900">
+            Graphic Design
+          </h3>
+
+          <p class="text-gray-500 text-sm mt-2 mb-5">
+            Building strong visual communication and brand experiences.
+          </p>
+
+          <ul class="skill-list space-y-3 text-gray-600 text-sm">
+
+            <li>
+              <i class="fa-solid fa-check text-indigo-500 mr-2"></i>
+              Brand Identity & Logo Design
+            </li>
+
+            <li>
+              <i class="fa-solid fa-check text-indigo-500 mr-2"></i>
+              Marketing & Editorial Assets
+            </li>
+
+            <li>
+              <i class="fa-solid fa-check text-indigo-500 mr-2"></i>
+              Typography & Layout
+            </li>
+
+            <li>
+              <i class="fa-solid fa-check text-indigo-500 mr-2"></i>
+              Illustration & Iconography
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- UX/UI -->
+
+        <div
+          class="skill-card reveal p-7 bg-gray-50 rounded-2xl border border-gray-100"
+        >
+
+          <div
+            class="skill-icon w-14 h-14 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center text-xl mb-6"
+          >
+            <i class="fa-solid fa-layer-group"></i>
+          </div>
+
+          <h3 class="text-xl font-bold text-gray-900">
+            UX/UI Design
+          </h3>
+
+          <p class="text-gray-500 text-sm mt-2 mb-5">
+            Designing intuitive interfaces and useful product experiences.
+          </p>
+
+          <ul class="skill-list space-y-3 text-gray-600 text-sm">
+
+            <li>
+              <i class="fa-solid fa-check text-indigo-500 mr-2"></i>
+              User Flows & Wireframes
+            </li>
+
+            <li>
+              <i class="fa-solid fa-check text-indigo-500 mr-2"></i>
+              Interactive Prototyping
+            </li>
+
+            <li>
+              <i class="fa-solid fa-check text-indigo-500 mr-2"></i>
+              Design Systems
+            </li>
+
+            <li>
+              <i class="fa-solid fa-check text-indigo-500 mr-2"></i>
+              Usability & Accessibility
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- Tools -->
+
+        <div
+          class="skill-card reveal p-7 bg-gray-50 rounded-2xl border border-gray-100"
+        >
+
+          <div
+            class="skill-icon w-14 h-14 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center text-xl mb-6"
+          >
+            <i class="fa-solid fa-toolbox"></i>
+          </div>
+
+          <h3 class="text-xl font-bold text-gray-900">
+            Tools & Software
+          </h3>
+
+          <p class="text-gray-500 text-sm mt-2 mb-5">
+            Working with modern tools throughout the design process.
+          </p>
+
+          <ul class="skill-list space-y-3 text-gray-600 text-sm">
+
+            <li>
+              <i class="fa-solid fa-check text-indigo-500 mr-2"></i>
+              Figma / Adobe XD
+            </li>
+
+            <li>
+              <i class="fa-solid fa-check text-indigo-500 mr-2"></i>
+              Photoshop / Illustrator
+            </li>
+
+            <li>
+              <i class="fa-solid fa-check text-indigo-500 mr-2"></i>
+              InDesign
+            </li>
+
+            <li>
+              <i class="fa-solid fa-check text-indigo-500 mr-2"></i>
+              Premiere Pro
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       EXPERTISE
+  ====================================================== -->
+
+  <section
+    id="expertise"
+    class="py-24 max-w-6xl mx-auto px-6"
+  >
+
+    <div class="max-w-3xl reveal">
+
+      <span class="section-label">
+        Capabilities
+      </span>
+
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">
+        Core Expertise
+      </h2>
+
+      <p class="text-gray-500 mt-4 mb-8">
+        Design capabilities focused on clear, useful, and engaging
+        digital experiences.
+      </p>
+
+    </div>
+
+
+    <div
+      class="flex flex-wrap gap-3 reveal"
+    >
+
+      <span class="expertise-tag bg-indigo-50 text-indigo-700 px-4 py-2.5 rounded-full text-sm font-medium">
+        UX/UI Design
+      </span>
+
+      <span class="expertise-tag bg-indigo-50 text-indigo-700 px-4 py-2.5 rounded-full text-sm font-medium">
+        Product Design
+      </span>
+
+      <span class="expertise-tag bg-indigo-50 text-indigo-700 px-4 py-2.5 rounded-full text-sm font-medium">
+        Visual Design
+      </span>
+
+      <span class="expertise-tag bg-indigo-50 text-indigo-700 px-4 py-2.5 rounded-full text-sm font-medium">
+        Mobile & Web Design
+      </span>
+
+      <span class="expertise-tag bg-indigo-50 text-indigo-700 px-4 py-2.5 rounded-full text-sm font-medium">
+        Design Systems
+      </span>
+
+      <span class="expertise-tag bg-indigo-50 text-indigo-700 px-4 py-2.5 rounded-full text-sm font-medium">
+        User Flows
+      </span>
+
+      <span class="expertise-tag bg-indigo-50 text-indigo-700 px-4 py-2.5 rounded-full text-sm font-medium">
+        Dashboard Design
+      </span>
+
+      <span class="expertise-tag bg-indigo-50 text-indigo-700 px-4 py-2.5 rounded-full text-sm font-medium">
+        E-commerce
+      </span>
+
+      <span class="expertise-tag bg-indigo-50 text-indigo-700 px-4 py-2.5 rounded-full text-sm font-medium">
+        Responsive Design
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       PROJECTS
+  ====================================================== -->
+
+  <section
+    id="projects"
+    class="py-24 bg-gray-50"
+  >
+
+    <div class="max-w-6xl mx-auto px-6">
+
+      <div
+        class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 reveal"
+      >
+
+        <div>
+
+          <span class="section-label">
+            Selected Work
+          </span>
+
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">
+            Projects
+          </h2>
+
+          <p class="text-gray-500 mt-3">
+            Selected UI/UX and visual design work.
+          </p>
+
+        </div>
+
+        <span
+          class="text-sm text-gray-400"
+        >
+          08 Projects
+        </span>
+
+      </div>
+
+
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12"
+      >
+
+        <!-- Project 01 -->
+
+        <div
+          class="project-card reveal bg-white rounded-2xl border border-gray-100 p-7"
+        >
+
+          <span class="project-number">
+            01
+          </span>
+
+          <span
+            class="text-xs font-semibold text-indigo-600 uppercase tracking-wider"
+          >
+            UX/UI Design · Visual Design
+          </span>
+
+          <h3
+            class="project-title text-xl font-bold text-gray-900 mt-4"
+          >
+            KSL — Cambodian Sign Language
+          </h3>
+
+          <p class="text-gray-600 text-sm leading-relaxed mt-3">
+            Designed an accessible learning and communication platform
+            focused on Cambodian Sign Language education and usability.
+          </p>
+
+          <div class="project-arrow mt-6 text-gray-300">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+
+        </div>
+
+
+        <!-- Project 02 -->
+
+        <div
+          class="project-card reveal bg-white rounded-2xl border border-gray-100 p-7"
+        >
+
+          <span class="project-number">
+            02
+          </span>
+
+          <span
+            class="text-xs font-semibold text-indigo-600 uppercase tracking-wider"
+          >
+            UX/UI Design
+          </span>
+
+          <h3
+            class="project-title text-xl font-bold text-gray-900 mt-4"
+          >
+            TrueHome System
+          </h3>
+
+          <p class="text-gray-600 text-sm leading-relaxed mt-3">
+            Designed dashboards and management workflows for property,
+            construction, projects, and business data.
+          </p>
+
+          <div class="project-arrow mt-6 text-gray-300">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+
+        </div>
+
+
+        <!-- Project 03 -->
+
+        <div
+          class="project-card reveal bg-white rounded-2xl border border-gray-100 p-7"
+        >
+
+          <span class="project-number">
+            03
+          </span>
+
+          <span
+            class="text-xs font-semibold text-indigo-600 uppercase tracking-wider"
+          >
+            UX/UI Design
+          </span>
+
+          <h3
+            class="project-title text-xl font-bold text-gray-900 mt-4"
+          >
+            PEAK Mobile App
+          </h3>
+
+          <p class="text-gray-600 text-sm leading-relaxed mt-3">
+            Designed a mobile experience for accessing services,
+            managing profiles, and receiving notifications.
+          </p>
+
+          <div class="project-arrow mt-6 text-gray-300">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+
+        </div>
+
+
+        <!-- Project 04 -->
+
+        <div
+          class="project-card reveal bg-white rounded-2xl border border-gray-100 p-7"
+        >
+
+          <span class="project-number">
+            04
+          </span>
+
+          <span
+            class="text-xs font-semibold text-indigo-600 uppercase tracking-wider"
+          >
+            UI Design · Visual Design
+          </span>
+
+          <h3
+            class="project-title text-xl font-bold text-gray-900 mt-4"
+          >
+            PEAK Landing Page
+          </h3>
+
+          <p class="text-gray-600 text-sm leading-relaxed mt-3">
+            Created a modern responsive landing page focused on
+            brand presentation, services, and conversion.
+          </p>
+
+          <div class="project-arrow mt-6 text-gray-300">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+
+        </div>
+
+
+        <!-- Project 05 -->
+
+        <div
+          class="project-card reveal bg-white rounded-2xl border border-gray-100 p-7"
+        >
+
+          <span class="project-number">
+            05
+          </span>
+
+          <span
+            class="text-xs font-semibold text-indigo-600 uppercase tracking-wider"
+          >
+            UX/UI Design · Visual Design
+          </span>
+
+          <h3
+            class="project-title text-xl font-bold text-gray-900 mt-4"
+          >
+            TrueHome Landing Page
+          </h3>
+
+          <p class="text-gray-600 text-sm leading-relaxed mt-3">
+            Designed a marketing website showcasing services,
+            projects, and brand identity.
+          </p>
+
+          <div class="project-arrow mt-6 text-gray-300">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+
+        </div>
+
+
+        <!-- Project 06 -->
+
+        <div
+          class="project-card reveal bg-white rounded-2xl border border-gray-100 p-7"
+        >
+
+          <span class="project-number">
+            06
+          </span>
+
+          <span
+            class="text-xs font-semibold text-indigo-600 uppercase tracking-wider"
+          >
+            UX/UI Design
+          </span>
+
+          <h3
+            class="project-title text-xl font-bold text-gray-900 mt-4"
+          >
+            Casino
+          </h3>
+
+          <p class="text-gray-600 text-sm leading-relaxed mt-3">
+            Designed responsive sports and entertainment interfaces,
+            dashboards, navigation, and transaction flows.
+          </p>
+
+          <div class="project-arrow mt-6 text-gray-300">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+
+        </div>
+
+
+        <!-- Project 07 -->
+
+        <div
+          class="project-card reveal bg-white rounded-2xl border border-gray-100 p-7"
+        >
+
+          <span class="project-number">
+            07
+          </span>
+
+          <span
+            class="text-xs font-semibold text-indigo-600 uppercase tracking-wider"
+          >
+            UX/UI Design
+          </span>
+
+          <h3
+            class="project-title text-xl font-bold text-gray-900 mt-4"
+          >
+            P/E Essential App
+          </h3>
+
+          <p class="text-gray-600 text-sm leading-relaxed mt-3">
+            Designed an e-commerce experience covering discovery,
+            shopping, promotions, vouchers, membership, rewards,
+            checkout, and order tracking.
+          </p>
+
+          <div class="project-arrow mt-6 text-gray-300">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+
+        </div>
+
+
+        <!-- Project 08 -->
+
+        <div
+          class="project-card reveal bg-white rounded-2xl border border-gray-100 p-7"
+        >
+
+          <span class="project-number">
+            08
+          </span>
+
+          <span
+            class="text-xs font-semibold text-indigo-600 uppercase tracking-wider"
+          >
+            UX/UI Design · Product Design
+          </span>
+
+          <h3
+            class="project-title text-xl font-bold text-gray-900 mt-4"
+          >
+            Velzo
+          </h3>
+
+          <p class="text-gray-600 text-sm leading-relaxed mt-3">
+            Designed a marketplace experience connecting shoppers
+            and sellers through product discovery, favorites,
+            profiles, and shopping flows.
+          </p>
+
+          <div class="project-arrow mt-6 text-gray-300">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       EXPERIENCE
+  ====================================================== -->
+
+  <section
+    id="experience"
+    class="py-24 bg-white border-y border-gray-100"
+  >
+
+    <div class="max-w-6xl mx-auto px-6">
+
+      <div class="reveal">
+
+        <span class="section-label">
+          Career
+        </span>
+
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">
+          Professional Experience
+        </h2>
+
+      </div>
+
+
+      <div
+        class="mt-14 max-w-3xl border-l-2 border-gray-200 ml-3 pl-7 space-y-12"
+      >
+
+        <!-- Experience 01 -->
+
+        <div class="experience-item reveal">
+
+          <div class="timeline-dot"></div>
+
+          <span class="text-sm font-semibold text-indigo-600">
+            2024 — Present
+          </span>
+
+          <h3 class="text-xl font-bold text-gray-900 mt-2">
+            Senior Graphic & UX/UI Designer
+          </h3>
+
+          <p class="text-sm text-gray-500 mt-1">
+            PEAK Digital Ltd.
+          </p>
+
+          <p class="text-gray-600 text-sm leading-relaxed mt-4">
+            Lead digital product and brand experience design across
+            web and mobile, covering UX/UI, product design, visual
+            design, branding, and marketing.
+          </p>
+
+          <ul
+            class="list-disc list-inside text-gray-600 text-sm space-y-2 mt-4"
+          >
+
+            <li>
+              Lead UX/UI and product design from concept to implementation.
+            </li>
+
+            <li>
+              Design dashboards, e-commerce experiences, and internal systems.
+            </li>
+
+            <li>
+              Develop design systems, visual guidelines, and reusable components.
+            </li>
+
+            <li>
+              Collaborate with developers and stakeholders on user-centered solutions.
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- Experience 02 -->
+
+        <div class="experience-item reveal">
+
+          <div class="timeline-dot"></div>
+
+          <span class="text-sm font-semibold text-gray-400">
+            2023 — 2024
+          </span>
+
+          <h3 class="text-xl font-bold text-gray-900 mt-2">
+            Graphic Designer & UI/UX Designer
+          </h3>
+
+          <p class="text-sm text-gray-500 mt-1">
+            PEAK Digital Ltd.
+          </p>
+
+          <p class="text-gray-600 text-sm leading-relaxed mt-4">
+            Designed user experiences and interfaces for web and
+            mobile products, working closely with product teams
+            and developers.
+          </p>
+
+          <ul
+            class="list-disc list-inside text-gray-600 text-sm space-y-2 mt-4"
+          >
+
+            <li>
+              Created user flows, wireframes, prototypes, and high-fidelity UI designs.
+            </li>
+
+            <li>
+              Designed responsive interfaces for web and mobile platforms.
+            </li>
+
+            <li>
+              Improved usability, navigation, and overall product experience.
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- Experience 03 -->
+
+        <div class="experience-item reveal">
+
+          <div class="timeline-dot"></div>
+
+          <span class="text-sm font-semibold text-gray-400">
+            2020 — 2023
+          </span>
+
+          <h3 class="text-xl font-bold text-gray-900 mt-2">
+            Graphic Designer
+          </h3>
+
+          <p class="text-sm text-gray-500 mt-1">
+            In-House Property Management
+          </p>
+
+          <p class="text-gray-600 text-sm leading-relaxed mt-4">
+            Created visual and marketing materials supporting
+            property management, business operations, and
+            promotional campaigns.
+          </p>
+
+          <ul
+            class="list-disc list-inside text-gray-600 text-sm space-y-2 mt-4"
+          >
+
+            <li>
+              Designed social media content, advertisements, and campaigns.
+            </li>
+
+            <li>
+              Developed visual concepts aligned with brand identity and business goals.
+            </li>
+
+            <li>
+              Maintained consistent visual communication across digital and print channels.
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- Experience 04 -->
+
+        <div class="experience-item reveal">
+
+          <div class="timeline-dot"></div>
+
+          <span class="text-sm font-semibold text-gray-400">
+            2018 — 2020
+          </span>
+
+          <h3 class="text-xl font-bold text-gray-900 mt-2">
+            Junior Graphic Designer
+          </h3>
+
+          <p class="text-sm text-gray-500 mt-1">
+            Top Marketing Indochina
+          </p>
+
+          <p class="text-gray-600 text-sm leading-relaxed mt-4">
+            Supported regional client projects across branding,
+            digital marketing, print, and motion design.
+          </p>
+
+          <ul
+            class="list-disc list-inside text-gray-600 text-sm space-y-2 mt-4"
+          >
+
+            <li>
+              Created digital, social media, print, and promotional assets.
+            </li>
+
+            <li>
+              Produced motion graphics and visual content for digital platforms.
+            </li>
+
+            <li>
+              Assisted with creative concepts while maintaining brand consistency.
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       EDUCATION
+  ====================================================== -->
+
+  <section
+    id="education"
+    class="py-24 max-w-6xl mx-auto px-6"
+  >
+
+    <div class="reveal">
+
+      <span class="section-label">
+        Learning
+      </span>
+
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">
+        Education
+      </h2>
+
+    </div>
+
+
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 gap-7 mt-12"
+    >
+
+      <!-- Education 01 -->
+
+      <div
+        class="education-card reveal p-7 bg-white rounded-2xl border border-gray-100 shadow-sm"
+      >
+
+        <span
+          class="inline-flex bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full text-xs font-semibold"
+        >
+          Short Course
+        </span>
+
+        <h3 class="text-xl font-bold text-gray-900 mt-5">
+          Computer Graphics & Design
+        </h3>
+
+        <p class="text-sm text-gray-500 mt-2">
+          STEP IT Academy
+        </p>
+
+        <p class="text-gray-600 text-sm leading-relaxed mt-4">
+          Focus on user experience, human-computer interaction,
+          and visual communication.
+        </p>
+
+      </div>
+
+
+      <!-- Education 02 -->
+
+      <div
+        class="education-card reveal p-7 bg-white rounded-2xl border border-gray-100 shadow-sm"
+      >
+
+        <span
+          class="inline-flex bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full text-xs font-semibold"
+        >
+          Certification
+        </span>
+
+        <h3 class="text-xl font-bold text-gray-900 mt-5">
+          Professional UX/UI Certificate
+        </h3>
+
+        <p class="text-sm text-gray-500 mt-2">
+          STEP IT Academy / Future.bit Academy
+        </p>
+
+        <p class="text-gray-600 text-sm leading-relaxed mt-4">
+          Advanced coursework covering user research,
+          prototyping, accessibility, and digital product design.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       CONTACT
+  ====================================================== -->
+
+  <section
+    id="contact"
+    class="py-28 bg-gray-950 text-white"
+  >
+
+    <div class="contact-glow contact-glow-1"></div>
+    <div class="contact-glow contact-glow-2"></div>
+
+
+    <div
+      class="max-w-6xl mx-auto px-6 text-center relative z-10"
+    >
+
+      <div class="reveal">
+
+        <span
+          class="inline-flex items-center gap-2 text-indigo-400 text-xs font-bold uppercase tracking-[0.2em] mb-5"
+        >
+          <span class="w-6 h-px bg-indigo-400"></span>
+          Let's Connect
+          <span class="w-6 h-px bg-indigo-400"></span>
+        </span>
+
+        <h2
+          class="text-4xl sm:text-5xl font-bold"
+        >
+          Let's Work Together
+        </h2>
+
+        <p
+          class="text-gray-400 max-w-xl mx-auto mt-5 leading-relaxed"
+        >
+          Available for full-time opportunities, high-impact design
+          consulting, and select freelance projects across mobile
+          and web.
+        </p>
+
+      </div>
+
+
+      <!-- Contact Buttons -->
+
+      <div
+        class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-10 reveal"
+      >
+
+        <!-- Gmail -->
+
+        <a
+          href="mailto:cheavirak6799@gmail.com"
+          class="contact-button bg-red-600 hover:bg-red-700 text-white px-6 py-3.5 rounded-xl font-medium inline-flex items-center gap-3"
+        >
+
+          <i class="fa-solid fa-envelope text-lg"></i>
+
+          Email Me
+
+        </a>
+
+
+        <!-- Phone -->
+
+        <a
+          href="tel:+85570703705"
+          class="contact-button text-gray-300 hover:text-white border border-gray-700 hover:border-gray-500 px-6 py-3.5 rounded-xl font-medium inline-flex items-center gap-3"
+        >
+
+          <i class="fa-solid fa-phone"></i>
+
+          +855 70 703 705
+
+        </a>
+
+
+        <!-- Telegram -->
+
+        <a
+          href="https://t.me/PhosRak"
+          target="_blank"
+          rel="noreferrer"
+          class="contact-button text-[#229ED9] hover:text-white border border-[#229ED9] hover:bg-[#229ED9] px-6 py-3.5 rounded-xl font-medium inline-flex items-center gap-3"
+        >
+
+          <i class="fa-brands fa-telegram text-lg"></i>
+
+          Telegram
+
+        </a>
+
+      </div>
+
+
+      <!-- Footer -->
+
+      <div
+        class="border-t border-gray-800 mt-20 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500"
+      >
+
+        <p>
           © 2026 Chea Virak. All rights reserved.
         </p>
+
+        <p>
+          Designed with passion & precision.
+        </p>
+
       </div>
-    </section>
-  </body>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       BACK TO TOP
+  ====================================================== -->
+
+  <button
+    id="back-to-top"
+    aria-label="Back to top"
+  >
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script>
+
+    /* =====================================================
+       PAGE LOADER
+    ===================================================== */
+
+    window.addEventListener("load", () => {
+
+      const loader = document.getElementById("page-loader");
+
+      setTimeout(() => {
+        loader.classList.add("hide");
+      }, 500);
+
+    });
+
+
+    /* =====================================================
+       NAVBAR
+    ===================================================== */
+
+    const navbar = document.getElementById("navbar");
+
+    function updateNavbar() {
+
+      if (window.scrollY > 40) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+
+    }
+
+    window.addEventListener("scroll", updateNavbar);
+
+    updateNavbar();
+
+
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
+
+    const menuButton = document.getElementById("menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const menuIcon = document.querySelector(".menu-icon");
+
+    menuButton.addEventListener("click", () => {
+
+      mobileMenu.classList.toggle("open");
+      menuIcon.classList.toggle("rotate");
+
+      if (mobileMenu.classList.contains("open")) {
+
+        menuIcon.classList.remove("fa-bars");
+        menuIcon.classList.add("fa-xmark");
+
+      } else {
+
+        menuIcon.classList.remove("fa-xmark");
+        menuIcon.classList.add("fa-bars");
+
+      }
+
+    });
+
+
+    /* Close mobile menu */
+
+    document.querySelectorAll(".mobile-nav-link").forEach((link) => {
+
+      link.addEventListener("click", () => {
+
+        mobileMenu.classList.remove("open");
+        menuIcon.classList.remove("rotate");
+
+        menuIcon.classList.remove("fa-xmark");
+        menuIcon.classList.add("fa-bars");
+
+      });
+
+    });
+
+
+    /* =====================================================
+       SCROLL REVEAL
+    ====================================================== */
+
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+
+        entries.forEach((entry) => {
+
+          if (entry.isIntersecting) {
+
+            entry.target.classList.add("active");
+
+            observer.unobserve(entry.target);
+
+          }
+
+        });
+
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -50px 0px"
+      }
+    );
+
+
+    revealElements.forEach((element) => {
+
+      revealObserver.observe(element);
+
+    });
+
+
+    /* =====================================================
+       ACTIVE NAVIGATION
+    ====================================================== */
+
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    function updateActiveNavigation() {
+
+      let currentSection = "";
+
+      sections.forEach((section) => {
+
+        const sectionTop =
+          section.offsetTop - 160;
+
+        const sectionHeight =
+          section.offsetHeight;
+
+        if (
+          window.scrollY >= sectionTop &&
+          window.scrollY < sectionTop + sectionHeight
+        ) {
+
+          currentSection = section.id;
+
+        }
+
+      });
+
+
+      navLinks.forEach((link) => {
+
+        link.classList.remove("active");
+
+        const target =
+          link.getAttribute("href").replace("#", "");
+
+        if (target === currentSection) {
+
+          link.classList.add("active");
+
+        }
+
+      });
+
+    }
+
+    window.addEventListener(
+      "scroll",
+      updateActiveNavigation
+    );
+
+    updateActiveNavigation();
+
+
+    /* =====================================================
+       BACK TO TOP
+    ====================================================== */
+
+    const backToTop =
+      document.getElementById("back-to-top");
+
+    function updateBackToTop() {
+
+      if (window.scrollY > 500) {
+
+        backToTop.classList.add("show");
+
+      } else {
+
+        backToTop.classList.remove("show");
+
+      }
+
+    }
+
+    window.addEventListener(
+      "scroll",
+      updateBackToTop
+    );
+
+
+    backToTop.addEventListener("click", () => {
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    });
+
+
+    /* =====================================================
+       SMOOTH ANCHOR SCROLL
+    ====================================================== */
+
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+
+      link.addEventListener("click", (event) => {
+
+        const targetId =
+          link.getAttribute("href");
+
+        if (targetId === "#") {
+
+          event.preventDefault();
+
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+
+          return;
+
+        }
+
+        const target =
+          document.querySelector(targetId);
+
+        if (target) {
+
+          event.preventDefault();
+
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+
+        }
+
+      });
+
+    });
+
+
+    /* =====================================================
+       PROJECT CARD MOUSE EFFECT
+    ====================================================== */
+
+    const projectCards =
+      document.querySelectorAll(".project-card");
+
+    projectCards.forEach((card) => {
+
+      card.addEventListener("mousemove", (event) => {
+
+        if (window.innerWidth < 768) return;
+
+        const rect =
+          card.getBoundingClientRect();
+
+        const x =
+          event.clientX - rect.left;
+
+        const y =
+          event.clientY - rect.top;
+
+        const centerX =
+          rect.width / 2;
+
+        const centerY =
+          rect.height / 2;
+
+        const rotateX =
+          ((y - centerY) / centerY) * -2;
+
+        const rotateY =
+          ((x - centerX) / centerX) * 2;
+
+        card.style.transform =
+          `translateY(-10px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+      });
+
+
+      card.addEventListener("mouseleave", () => {
+
+        card.style.transform = "";
+
+      });
+
+    });
+
+
+    /* =====================================================
+       ESC KEY CLOSE MOBILE MENU
+    ====================================================== */
+
+    document.addEventListener("keydown", (event) => {
+
+      if (event.key === "Escape") {
+
+        mobileMenu.classList.remove("open");
+        menuIcon.classList.remove("rotate");
+
+        menuIcon.classList.remove("fa-xmark");
+        menuIcon.classList.add("fa-bars");
+
+      }
+
+    });
+
+  </script>
+
+</body>
 </html>
